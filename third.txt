@@ -1,2 +1,3 @@
 Yet another text
 commit 2
+commit 3
