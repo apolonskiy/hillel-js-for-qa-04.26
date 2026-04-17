@@ -1,0 +1,17 @@
+{
+  "name": "lesson-3",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Andrii P.",
+
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./commonJs/import.js",
+    "module-test": "node ./ecmaScriptJs/import.js",
+    "pw-e2e:regression": "npx playwright test --project=chromium --grep @regression"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2"
+  }
+}
