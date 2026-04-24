@@ -53,3 +53,6 @@
 // ---
 console.log(5 + '10'); // "510" (рядок)
 console.log('15' * 5); // 10 (число)
+
+const age = 19;
+const isAdult = age >= 18 ? 'Allowed in a club' : 'Banned from entrance.';
