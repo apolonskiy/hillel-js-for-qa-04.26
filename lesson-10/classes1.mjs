@@ -8,10 +8,13 @@ export class Human {
     // static property
     static teethCount = 32;
 
+    // private propertu
+    #gender
+
     constructor(name, age, gender, countryOfOrigin = 'Ukraine') {
         this.name = name;
         this.age = age;
-        this._gender = gender;
+        this.gender = gender;
         this.countryOfOrigin = countryOfOrigin;
     }
 
@@ -35,11 +38,13 @@ export class Human {
     }
 
     get gender() {
-        return this._gender;
+        return this.#gender;
     }
 
     set gender(genderValue) {
-        this._gender = genderValue
+        if(genderValue.trimg() !== '') {
+            this.#gender = genderValue
+        }
     }
 
 
@@ -57,6 +62,8 @@ export class Human {
 }
 
 const human1 = new Human('Andrii', 30, 'male', 'Ukraine');
+
+console.log(human1 instanceof Human) // true
 // console.log(human1)
 // console.log('describeYourself' in human1) // true
 // console.log(human1.countryOfOrigin) // Ukraine
@@ -72,4 +79,6 @@ const human1 = new Human('Andrii', 30, 'male', 'Ukraine');
 // console.log(human1.teethCount) - does not work, since teethCount is static property
 // console.log(Human.teethCount) // 32
 // Human.describeTeethCount() // Humans have 32 teeth.
+
+
 
