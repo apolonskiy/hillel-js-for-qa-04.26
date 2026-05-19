@@ -13,10 +13,8 @@ asyncPow1(3).
 const asyncResolver = async () => {
 
     try {
-
         const result = await asyncPow1(3);
-        console.log(result);
-
+                 console.log(result)
     } catch (err) {
 
         console.log(err);
