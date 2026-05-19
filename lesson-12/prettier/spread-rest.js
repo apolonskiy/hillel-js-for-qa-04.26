@@ -1,6 +1,3 @@
-
-
-
 // const person = {name: 'QWE', name: 'John', age: 30};
 // const newPerson = {gender: 'female', name: 'Alice', ...person};
 
@@ -34,27 +31,42 @@
 // console.log(copyObj1);
 // console.log(ojb1);
 
-const generateObjectInfo = (name, age = 50, gender = 'male', childrenData = {}) => {
-    return childrenData ? {
-        name,
-        age,
-        gender,
-        children: childrenData
-    } : { name, age, gender };
-}
+const arrow = (x) => x;
 
-generateObjectInfo('Andrii', undefined, undefined, {age: 5, name: 'Marry'})
+const generateObjectInfo = (
+    name,
+    age = 50,
+    gender = 'male',
+    childrenData = {},
+) => {
+    return childrenData
+        ? {
+              name,
+              age,
+              gender,
+              children: childrenData,
+          }
+        : { name, age, gender };
+};
+
+generateObjectInfo('Andrii', undefined, undefined, { age: 5, name: 'Marry' });
 
 const generataObjectWithObjectArg = (obj) => {
-    const defaultvalues = {age: 50, gender: 'male', childrenData: {}}
-    obj = {...defaultvalues, ...obj};
-        return obj.childrenData ? {
-        name: obj.name,
-        age: obj.age,
-        gender: obj.gender,
-        children: obj.childrenData
-    } : { name: obj.name, age: obj.age, gender: obj.gender };
+    const defaultvalues = { age: 50, gender: 'male', childrenData: {} };
+    obj = { ...defaultvalues, ...obj };
+    return obj.childrenData
+        ? {
+              name: obj.name,
+              age: obj.age,
+              gender: obj.gender,
+              children: obj.childrenData,
+          }
+        : { name: obj.name, age: obj.age, gender: obj.gender };
+};
 
-}
-
-console.log(generataObjectWithObjectArg({name: 'Andrii', childrenData: {age: 5, name: 'Marry'}}))
+console.log(
+    generataObjectWithObjectArg({
+        name: 'Andrii',
+        childrenData: { age: 5, name: 'Marry' },
+    }),
+);

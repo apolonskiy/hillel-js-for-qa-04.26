@@ -1,0 +1,15 @@
+{
+  "name": "prettier",
+  "version": "1.0.0",
+  "main": "async-await.js",
+  "scripts": {
+    "prettier:check": "prettier . --check",
+    "prettier:fix": "prettier . --write"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prettier": "3.8.3"
+  }
+}

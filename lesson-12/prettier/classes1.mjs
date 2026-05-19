@@ -1,5 +1,3 @@
-
-
 export class Human {
     // public defined before consturctor
     countryOfOrigin = 'USA';
@@ -9,7 +7,7 @@ export class Human {
     static teethCount = 32;
 
     // private propertu
-    #gender
+    #gender;
 
     constructor(name, age, gender, countryOfOrigin = 'Ukraine') {
         this.name = name;
@@ -34,7 +32,7 @@ export class Human {
     describeYourself() {
         console.log(`Hello, my name is ${this.name}, I am ${this.age} years old, and I am ${this._gender}. 
             My Social Security Number is ${this.#socialSecurityNumber}`);
-            this.#addCountryOfOrigin();
+        this.#addCountryOfOrigin();
     }
 
     get gender() {
@@ -42,11 +40,10 @@ export class Human {
     }
 
     set gender(genderValue) {
-        if(genderValue.trimg() !== '') {
-            this.#gender = genderValue
+        if (genderValue.trimg() !== '') {
+            this.#gender = genderValue;
         }
     }
-
 
     get socialSecurityNumber() {
         return this.#socialSecurityNumber;
@@ -56,20 +53,22 @@ export class Human {
         if (typeof value === 'string' && value.length === 9) {
             this.#socialSecurityNumber = value;
         } else {
-            console.error('Invalid Social Security Number. It must be a string of 9 characters.');
+            console.error(
+                'Invalid Social Security Number. It must be a string of 9 characters.',
+            );
         }
     }
 }
 
 const human1 = new Human('Andrii', 30, 'male', 'Ukraine');
 
-console.log(human1 instanceof Human) // true
+console.log(human1 instanceof Human); // true
 // console.log(human1)
 // console.log('describeYourself' in human1) // true
 // console.log(human1.countryOfOrigin) // Ukraine
 // console.log(human1.socialSecurityNumber) // undefined
 // human1.socialSecurityNumber = '123456789';
-// console.log(human1.socialSecurityNumber) // 
+// console.log(human1.socialSecurityNumber) //
 // human1.describeYourself()
 // human1.gender = 'female'
 // console.log(human1.gender)
@@ -79,6 +78,3 @@ console.log(human1 instanceof Human) // true
 // console.log(human1.teethCount) - does not work, since teethCount is static property
 // console.log(Human.teethCount) // 32
 // Human.describeTeethCount() // Humans have 32 teeth.
-
-
-

@@ -1,14 +1,8 @@
-
-
 const asyncPow1 = async (arg) => arg ** 2;
 
-async function name(params) {
-    
-}
+async function name(params) {}
 
-const fnName = async function(params) {
-    
-}
+const fnName = async function (params) {};
 
 asyncPow1(3)
     .then((res) => console.log(res)) // 9
@@ -19,9 +13,7 @@ const asyncResolver = async () => {
         const result = await asyncPow1(3);
         console.log(result);
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
-    
-}
-console.log(asyncResolver())
-
+};
+console.log(asyncResolver());
