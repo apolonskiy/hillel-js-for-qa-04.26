@@ -1,0 +1,22 @@
+{
+  "name": "hillel-js-for-qa-04.26",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apolonskiy/hillel-js-for-qa-04.26.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apolonskiy/hillel-js-for-qa-04.26/issues"
+  },
+  "homepage": "https://github.com/apolonskiy/hillel-js-for-qa-04.26#readme",
+  "description": "",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

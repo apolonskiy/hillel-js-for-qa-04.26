@@ -1,0 +1,2 @@
+cd lesson-12/eslint
+npm run lint
