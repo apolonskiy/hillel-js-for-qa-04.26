@@ -1,0 +1,7 @@
+curl 'https://lms.ithillel.ua/api/lms/chats?user_id=66bcd67755a90fe6fccf0647&skip=0&limit=30' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'Referer: https://lms.ithillel.ua/groups/69777f6cbe4981c40f3a4b87/lessons/69777f6cbe4981c40f3a4ba2?article_id=68f7661eea084defac3cf108' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Google Chrome";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0'
