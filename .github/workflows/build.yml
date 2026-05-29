@@ -1,0 +1,49 @@
+name: CI Testing
+on:
+  # schedule:
+  #  - cron: '* * * * *'
+  push:
+    branches:
+      - "*"
+  pull_request:
+    types: ['opened']
+jobs:
+  lint-api: 
+    name: 'Lint API tests folder'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: latest
+      - name: check node
+        run: node -v
+      - name: Install dependecies
+        working-directory: ./lesson-14
+        run: npm i
+      - name: Run lint
+        working-directory: ./lesson-14
+        run: npm run lint
+  test-api: 
+    name: 'API tests Jest'
+    if: ${{ always() }}
+    needs: lint-api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: latest
+      - name: Install dependecies
+        working-directory: ./lesson-14
+        run: npm i
+      - name: Run api test
+        working-directory: ./lesson-14
+        run: npm run test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-api-html-report
+          path: |
+                lesson-14/html-report/
+          retention-days: 3
