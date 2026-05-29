@@ -6,10 +6,18 @@ import eslintPtettier from "eslint-plugin-prettier/recommended";
 import jestPlugin from "eslint-plugin-jest";
 
 export default defineConfig([
-  eslintPtettier,
+  {
+    ...eslintPtettier,
+    ignores: [
+      "node_modules/**",
+      "html-report/**",
+      ".gitignore",
+      "api/config/**",
+    ],
+  },
   {
     files: ["**/*.{js,mjs,cjs}"],
-    ignores: ["node_modules/**", "html-report/**"],
+    ignores: ["node_modules/**", "html-report/**", ".gitignore"],
     plugins: {
       js,
       "@stylistic": stylistic,

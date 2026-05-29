@@ -95,7 +95,7 @@ describe("First api tests for Bookstore - Classes based", () => {
       getBooksResp.data.books.map((b) => b.isbn),
       userToken,
     );
-    expect(resp.status).toBe(200);
+    expect(resp.status).toBe(201);
     expect(resp.data.books).toEqual(
       getBooksResp.data.books.map((b) => ({ isbn: b.isbn })),
     );
