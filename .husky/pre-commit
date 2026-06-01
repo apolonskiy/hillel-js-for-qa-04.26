@@ -1,2 +1,2 @@
-cd lesson-12/eslint
-npm run lint
+cd lesson-14
+npx lint-staged

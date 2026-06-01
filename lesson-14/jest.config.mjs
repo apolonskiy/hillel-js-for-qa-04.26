@@ -109,7 +109,17 @@ const config = {
   // projects: undefined,
 
   // Use this configuration option to add custom reporters to Jest
-  // reporters: undefined,
+  reporters: [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        publicPath: "./html-report",
+        filename: "jest-report.html",
+        openReport: false,
+      },
+    ],
+  ],
 
   // Automatically reset mock state before every test
   // resetMocks: false,
@@ -156,9 +166,7 @@ const config = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: [
-    "**/test-api-example/?(*.)+(spec|test).?([mc])[jt]s?(x)"
-  ],
+  testMatch: ["**/test-with-classes/?(*.)+(spec|test).?([mc])[jt]s?(x)"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -194,6 +202,8 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+
+  testTimeout: 10_000,
 };
 
 export default config;

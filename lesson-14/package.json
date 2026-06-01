@@ -4,7 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest"
+    "test": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" TEST_ENV=dev jest",
+    "test:preprod": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" TEST_ENV=preprod jest",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +16,21 @@
     "axios": "^1.16.1"
   },
   "devDependencies": {
-    "jest": "^30.4.2"
+    "@eslint/js": "^10.0.1",
+    "@faker-js/faker": "^10.4.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.15.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.6.0",
+    "jest": "^30.4.2",
+    "jest-html-reporters": "^3.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "3.8.3"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs}": "npm run lint"
   }
 }
