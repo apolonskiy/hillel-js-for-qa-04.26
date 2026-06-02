@@ -1,0 +1,20 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist &&tsc",
+    "run-built": "node dist/import.js",
+    "run-tsx": "tsx import.ts",
+    "run-ts-node": "ts-node import.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.3"
+  }
+}

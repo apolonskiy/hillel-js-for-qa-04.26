@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM tree structure</title>
+  </head>
+  <body>
+    <h1 id="h1DOM">DOM tree structure1</h1>
+	<h2 id="h2DOM">Learn about the DOM</h2>
+  <button id="myButton">Test handling </button>
+  <form onclick="alert('form')">FORM
+    <div onclick="event.stopPropagation()">DIV
+	      <p onclick="alert('p')">PPPPPPPP</p>
+    </div>
+</form>
+  </body>
+  <script>
+    const h2Dom = document.getElementById('h2DOM');
+    h2Dom.addEventListener('mouseover', () => h2Dom.style.color = 'red')
+    h2Dom.addEventListener('mouseout', () => h2Dom.style.color = 'green')
+    h2Dom.addEventListener('click', () => h2Dom.style.color = 'black')
+  </script>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM tree structure</title>
+  </head>
+  <body>
+    <h1 id="First header">DOM tree structure</h1>
+	<h2 id="smaller_header">Firt Text</h2>
+    <h2 id="smaller_header">Second</h2>
+    <h2 id="smaller_header">Third</h2>
+    <h2 id="abc">Learn about the DOM4</h2>
+  </body>
+</html> -->

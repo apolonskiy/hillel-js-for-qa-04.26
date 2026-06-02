@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "allowJs": true,
+        "preserveConstEnums": true,
+        "module": "commonjs",
+        "target": "ES2022",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "lib": ["esnext"],
+        "outDir": "dist",
+		"noEmitOnError": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "typeRoots": ["node_modules/@types"],
+        "alwaysStrict": true,
+        "resolveJsonModule": true,
+        "types": ["jest", "node"]
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "html-report",
+  ]
+}
