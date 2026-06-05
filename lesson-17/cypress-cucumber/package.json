@@ -1,0 +1,22 @@
+{
+  "name": "cypress-cucumber",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "cypress": "^15.16.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true
+    }
+  }
+}
