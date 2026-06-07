@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" TEST_ENV=dev jest",
+    "test-simple-mock": "cross-env TEST_ENV=dev jest --config jest-mock-babel.config.mjs",
     "test:preprod": "cross-env NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" TEST_ENV=preprod jest",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
@@ -16,9 +17,13 @@
     "axios": "^1.16.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
     "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.4.0",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "axios-mock-adapter": "^2.1.0",
+    "babel-jest": "^30.4.1",
     "cross-env": "^10.1.0",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",

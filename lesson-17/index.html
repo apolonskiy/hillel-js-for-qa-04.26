@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM tree structure</title>
+  </head>
+  <body>
+    <h1 id="h1DOM">DOM tree structure1</h1>
+	<h2 id="h2DOM">Learn about the DOM</h2>
+  <button id="myButton">Test handling </button>
+  <form onclick="alert('form')">FORM
+    <div onclick="event.stopPropagation()">DIV
+	      <p onclick="alert('p')">PPPPPPPP</p>
+    </div>
+</form>
+
+<div>
+  <table id="users-table" data-test="users-data-table" border="1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Alice</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Bob</td>
+            </tr>
+          </tbody>
+        </table>
+   
+        <table id="settings-table" data-test="settings-data-table" border="1">
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Theme</td>
+              <td>Dark</td>
+            </tr>
+            <tr>
+              <td>Notifications</td>
+              <td>On</td>
+            </tr>
+                       <tr>
+              <td>Email</td>
+              <td>off</td>
+            </tr>
+          </tbody>
+        </table>
+   
+        <table id="status-table" data-test="system-status-table" border="1">
+         <thead>
+           <tr>
+              <th>Service</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr>
+             <td>Database</td>
+             <td>Online</td>
+           </tr>
+            <tr>
+              <td>Cache</td>
+            <td>Warning</td>
+           </tr>
+         </tbody>
+       </table>
+</div>
+
+  </body>
+  <script>
+    const h2Dom = document.getElementById('h2DOM');
+    h2Dom.addEventListener('mouseover', () => h2Dom.style.color = 'red')
+    h2Dom.addEventListener('mouseout', () => h2Dom.style.color = 'green')
+    h2Dom.addEventListener('click', () => h2Dom.style.color = 'black')
+  </script>
+</html>
+
