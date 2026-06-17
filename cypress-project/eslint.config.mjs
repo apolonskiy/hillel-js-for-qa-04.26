@@ -27,6 +27,7 @@ export default defineConfig([
       "mocha/no-exclusive-tests": "error",
       "mocha/no-pending-tests": "error",
       "mocha/no-mocha-arrows": "off",
+      "mocha/max-top-level-suites": "off",
       "cypress/no-unnecessary-waiting": "off",
     },
   },

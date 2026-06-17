@@ -23,3 +23,25 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("login", (username, password) => {
+  cy.xpath("//button[contains(text(), 'Sign In')]").click();
+  cy.get('[class="modal-content"]').within(() => {
+    cy.get('input[id="signinEmail"]').type(username);
+    cy.get('input[id="signinPassword"]').type(password);
+    cy.contains("button", "Login").should("be.enabled").click();
+  });
+});
+
+Cypress.Commands.overwrite("visit", (originalFn, url, options) => {
+  originalFn(url, {
+    auth: Cypress.expose("basicAuth"),
+    ...options,
+  });
+});
+
+Cypress.Commands.addQuery("getByClassName", function getByClassName(name) {
+  return () => {
+    return Cypress.$(`[class*="${name}"]`);
+  };
+});
