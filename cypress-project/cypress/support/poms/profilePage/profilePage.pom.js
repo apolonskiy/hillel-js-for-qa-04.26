@@ -17,7 +17,7 @@ export class ProfilePage {
   }
 
   clickEditProfile() {
-    cy.wait(500)
+    cy.wait(500);
     this.selectors.editButton().click();
   }
 }

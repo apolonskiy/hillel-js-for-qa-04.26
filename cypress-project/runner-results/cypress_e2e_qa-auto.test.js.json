@@ -4,7 +4,7 @@
   "passes": 2,
   "pending": 0,
   "failures": 0,
-  "start": "2026-06-19T18:37:25.003Z",
-  "duration": 5811,
+  "start": "2026-06-19T20:48:41.771Z",
+  "duration": 4144,
   "file": "cypress/e2e/qa-auto.test.js"
 }

@@ -12,10 +12,10 @@
     "cypress:run:chrome:dev:headed": "cypress run --browser chrome --headed --env TEST_ENV=dev",
     "cypress:run:chrome:prod:headed": "cypress run --browser chrome --headed --env TEST_ENV=prod",
     "cypress:run:chrome:node-dev:headless": "TEST_ENV=dev cypress run --browser chrome --env allure=true",
-    "cypress:run:chrome:node-prod:headless": "TEST_ENV=prod cypress run --browser chrome --env allure=true --headed",
+    "cypress:run:chrome:node-prod:headless": "TEST_ENV=prod cypress run --browser chrome --env allure=true",
     "merge-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/mochawesome-result.json",
     "generate-report": "npx marge cypress/reports/mochawesome-result.json -o cypress/reports/html",
-    "cypress:parallel": "cypress-parallel -s cypress:run:chrome:node-dev:headless -t 2 -d cypress/e2e -r mochawesome -o '\"reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true\"'"
+    "cypress:parallel": "cypress-parallel -s cypress:run:chrome:node-prod:headless -t 2 -d cypress/e2e -r mochawesome -o '\"reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true\"'"
   },
   "author": "",
   "license": "ISC",

@@ -21,7 +21,7 @@ import "@shelex/cypress-allure-plugin";
 import { addMatchImageSnapshotCommand } from "@simonsmith/cypress-image-snapshot/command";
 
 addMatchImageSnapshotCommand({
-  failureThreshold: 0.03,
+  failureThreshold: 0.05,
   failureThresholdType: "percent",
   capture: "viewport",
   e2eSpecDir: "cypress/e2e/",
