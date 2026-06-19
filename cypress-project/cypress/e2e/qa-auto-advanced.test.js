@@ -37,7 +37,8 @@ describe("Profile page tests", () => {
 
 describe("Profile page tests - class based", () => {
   beforeEach(() => {
-    cy.visit("https://qauto.forstudy.space/");
+    // console.log(Cypress.config().baseUrl)
+    cy.visit(Cypress.config().baseUrl);
     cy.env(["defaultUserCreds"]).then(({ defaultUserCreds }) => {
       const loginDialog = landingPage.clickSignIn();
       landingPage.loginDialog.executeLogin(
@@ -47,10 +48,20 @@ describe("Profile page tests - class based", () => {
     });
   });
 
-  it("Get to profile page after login and update profile photo", () => {
-    cy.url().should("eq", "https://qauto.forstudy.space/panel/garage");
+  it("Get to profile page after login and update profile photo - class based", () => {
+    // cy.env(["DARIA"]).then(( {DARIA} ) => {
+    //   cy.task("log", `<><><><Running test in ${JSON.stringify(DARIA)} environment<><><>`);
+    // });
+    cy.url().should("eq", `${Cypress.config().baseUrl}/panel/garage`);
     profilePage.selectProfilePage();
+    profilePage.selectors.profileName().should("be.visible");
+    cy.wait(7000);
+    cy.matchImageSnapshot("profile-page");
     profilePage.clickEditProfile();
+    editProfileDialog.selectors
+      .dialogContent()
+      .should("be.visible")
+      .matchImageSnapshot("edit-profile-dialog");
     editProfileDialog.uploadProfileImage(
       "cypress/fixtures/images/profile-image.png",
     );

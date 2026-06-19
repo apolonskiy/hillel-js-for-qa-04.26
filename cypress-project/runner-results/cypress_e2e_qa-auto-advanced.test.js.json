@@ -1,0 +1,10 @@
+{
+  "suites": 2,
+  "tests": 2,
+  "passes": 2,
+  "pending": 0,
+  "failures": 0,
+  "start": "2026-06-19T18:37:25.003Z",
+  "duration": 30260,
+  "file": "cypress/e2e/qa-auto-advanced.test.js"
+}
