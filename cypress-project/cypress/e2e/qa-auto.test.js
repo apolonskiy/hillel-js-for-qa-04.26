@@ -1,6 +1,6 @@
 describe("Registration tests", () => {
   beforeEach(() => {
-    cy.visit("https://qauto.forstudy.space/", {
+    cy.visit(Cypress.config().baseUrl, {
       auth: Cypress.expose("basicAuth"),
     });
     cy.xpath("//button[contains(text(), 'Sign In')]").as("signInButton");
@@ -61,7 +61,7 @@ describe("Registration tests", () => {
         cy.get('input[id="signinPassword"]').type(defaultUserCreds.password);
         cy.contains("button", "Login").should("be.enabled").click();
       });
-      cy.url().should("eq", "https://qauto.forstudy.space/panel/garage");
+      cy.url().should("eq", `${Cypress.config().baseUrl}/panel/garage`);
     });
   });
 });

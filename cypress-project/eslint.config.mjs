@@ -9,7 +9,13 @@ import pluginMocha from "eslint-plugin-mocha";
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,ts}"],
-    ignores: ["node_modules/**", "html-report/**", ".gitignore"],
+    ignores: [
+      "node_modules/**",
+      "html-report/**",
+      ".gitignore",
+      "cypress/reports/**",
+      "allure-results/**",
+    ],
     plugins: {
       js,
       "@stylistic": stylistic,
@@ -25,7 +31,7 @@ export default defineConfig([
       "no-undef": 0, // 'off',
       "no-unused-vars": 0, // 'off',
       "mocha/no-exclusive-tests": "error",
-      "mocha/no-pending-tests": "error",
+      "mocha/no-pending-tests": "warn",
       "mocha/no-mocha-arrows": "off",
       "mocha/max-top-level-suites": "off",
       "cypress/no-unnecessary-waiting": "off",

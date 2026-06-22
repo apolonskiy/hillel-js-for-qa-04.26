@@ -9,11 +9,11 @@ import {
 const landingPage = new LandingPage();
 const profilePage = new ProfilePage();
 const editProfileDialog = new EditProfileDialog();
-// const loginDialog = new LoginDialog();
 
-describe("Profile page tests", () => {
+// This is replaced with Class-based test.
+describe.skip("Profile page tests", () => {
   beforeEach(() => {
-    cy.visit("https://qauto.forstudy.space/");
+    cy.visit(Cypress.config().baseUrl);
     cy.getByClassName("-guest").should("be.visible");
     cy.env(["defaultUserCreds"]).then(({ defaultUserCreds }) => {
       cy.login(defaultUserCreds.username, defaultUserCreds.password);
@@ -21,11 +21,11 @@ describe("Profile page tests", () => {
   });
 
   it("Get to profile page after login and update profile photo", () => {
-    cy.url().should("eq", "https://qauto.forstudy.space/panel/garage");
+    cy.url().should("eq", `${Cypress.config().baseUrl}/panel/garage`);
     cy.contains('[class*="sidebar"] a', "Profile").click();
     cy.contains("button", "Edit profile").click();
     cy.get('[id="editProfilePhoto"] input').selectFile(
-      "cypress/fixtures/images/profile-image.png",
+      "cypress/fixtures/images/profile-image.jpg",
     );
     cy.wait(1500);
     cy.contains("button", "Save").should("be.enabled").click();
@@ -37,7 +37,8 @@ describe("Profile page tests", () => {
 
 describe("Profile page tests - class based", () => {
   beforeEach(() => {
-    cy.visit("https://qauto.forstudy.space/");
+    // console.log(Cypress.config().baseUrl)
+    cy.visit(Cypress.config().baseUrl);
     cy.env(["defaultUserCreds"]).then(({ defaultUserCreds }) => {
       const loginDialog = landingPage.clickSignIn();
       landingPage.loginDialog.executeLogin(
@@ -47,12 +48,17 @@ describe("Profile page tests - class based", () => {
     });
   });
 
-  it("Get to profile page after login and update profile photo", () => {
-    cy.url().should("eq", "https://qauto.forstudy.space/panel/garage");
+  it("Get to profile page after login and update profile photo - class based", () => {
+    // cy.env(["DARIA"]).then(( {DARIA} ) => {
+    //   cy.task("log", `<><><><Running test in ${JSON.stringify(DARIA)} environment<><><>`);
+    // });
+    cy.url().should("eq", `${Cypress.config().baseUrl}/panel/garage`);
     profilePage.selectProfilePage();
+    profilePage.selectors.profileName().should("be.visible");
     profilePage.clickEditProfile();
+    editProfileDialog.selectors.dialogContent().should("be.visible");
     editProfileDialog.uploadProfileImage(
-      "cypress/fixtures/images/profile-image.png",
+      "cypress/fixtures/images/profile-image.jpg",
     );
     editProfileDialog.clickSaveButton();
     cy.get('div[class*="alert-success"] p')

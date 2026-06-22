@@ -16,3 +16,15 @@
 // Import commands.js using ES2015 syntax:
 import "./commands";
 import "cypress-xpath";
+import "cypress-mochawesome-reporter/register";
+
+// import "@shelex/cypress-allure-plugin"; // allure reporter setup - needs `allowCypressEnv: true`
+// import { addMatchImageSnapshotCommand } from "@simonsmith/cypress-image-snapshot/command"; // snapshot testing setup - needs `allowCypressEnv: true`
+
+// snapshot testing setup - needs `allowCypressEnv: true`
+// addMatchImageSnapshotCommand({
+//   failureThreshold: 0.05,
+//   failureThresholdType: "percent",
+//   capture: "viewport",
+//   e2eSpecDir: "cypress/e2e/",
+// });

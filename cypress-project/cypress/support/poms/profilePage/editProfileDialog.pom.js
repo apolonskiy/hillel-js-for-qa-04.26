@@ -1,5 +1,6 @@
 export class EditProfileDialog {
   selectors = {
+    dialogContent: () => cy.get('[class="modal-content"]'),
     firstNameInput: () => cy.get('[id="editProfileName"]'),
     lastNameInput: () => cy.get('[id="editProfileLastName"]'),
     countryInput: () => cy.get('[id="editProfileCountry"]'),
@@ -35,9 +36,9 @@ export class EditProfileDialog {
    * @returns {void}
    */
   uploadProfileImage(imagePath) {
-    cy.wait(500);
-    this.selectors.profileImageInput().selectFile(imagePath);
-    cy.wait(500);
+    cy.wait(1000);
+    this.selectors.profileImageInput().selectFile(imagePath, { timeout: 3000 });
+    cy.wait(1000);
   }
 
   clickSaveButton() {

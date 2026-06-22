@@ -1,3 +1,12 @@
 node_modules
+cypress/.DS_Store
 cypress/screenshots
 cypress/videos
+cypress/reports
+cypress/fixtures/.DS_Store
+allure-results
+cypress/snapshots/**/__diff_output__
+cypress/parallel-weights.json
+multi-reporter-config.json
+runner-results
+.DS_Store

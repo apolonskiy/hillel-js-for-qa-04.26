@@ -8,7 +8,14 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:run:chrome": "cypress run --browser chrome",
-    "cypress:run:headed": "cypress run --browser chrome --headed"
+    "cypress:run:headed": "cypress run --browser chrome --headed",
+    "cypress:run:chrome:dev:headed": "cypress run --browser chrome --headed --env TEST_ENV=dev",
+    "cypress:run:chrome:prod:headed": "cypress run --browser chrome --headed --env TEST_ENV=prod",
+    "cypress:run:chrome:node-dev:headless": "TEST_ENV=dev cypress run --browser chrome --env allure=true",
+    "cypress:run:chrome:node-prod:headless": "TEST_ENV=prod cypress run --browser chrome --env allure=true",
+    "merge-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/mochawesome-result.json",
+    "generate-report": "npx marge cypress/reports/mochawesome-result.json -o cypress/reports/html",
+    "cypress:parallel": "cypress-parallel -s cypress:run:chrome:node-prod:headless -t 2 -d cypress/e2e -r mochawesome -o '\"reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true\"'"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +25,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@shelex/cypress-allure-plugin": "^2.41.2",
+    "@simonsmith/cypress-image-snapshot": "^10.0.4",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "@testomatio/reporter": "^2.9.1",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "cypress-multi-reporters": "^2.0.5",
+    "cypress-parallel": "^0.15.0",
     "cypress-xpath": "^2.0.1",
     "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
@@ -26,6 +39,9 @@
     "eslint-plugin-mocha": "^11.3.0",
     "eslint-plugin-prettier": "^5.5.6",
     "globals": "^17.6.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2",
     "prettier": "^3.8.4"
   }
 }
