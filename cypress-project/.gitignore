@@ -3,4 +3,4 @@ cypress/screenshots
 cypress/videos
 cypress/reports
 allure-results
-snapshots/**/__diff_output__
+cypress/snapshots/**/__diff_output__
