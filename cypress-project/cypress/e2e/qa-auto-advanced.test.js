@@ -9,9 +9,9 @@ import {
 const landingPage = new LandingPage();
 const profilePage = new ProfilePage();
 const editProfileDialog = new EditProfileDialog();
-// const loginDialog = new LoginDialog();
 
-describe("Profile page tests", () => {
+// This is replaced with Class-based test.
+describe.skip("Profile page tests", () => {
   beforeEach(() => {
     cy.visit(Cypress.config().baseUrl);
     cy.getByClassName("-guest").should("be.visible");
@@ -55,12 +55,8 @@ describe("Profile page tests - class based", () => {
     cy.url().should("eq", `${Cypress.config().baseUrl}/panel/garage`);
     profilePage.selectProfilePage();
     profilePage.selectors.profileName().should("be.visible");
-    cy.matchImageSnapshot("profile-page");
     profilePage.clickEditProfile();
-    editProfileDialog.selectors
-      .dialogContent()
-      .should("be.visible")
-      .matchImageSnapshot("edit-profile-dialog");
+    editProfileDialog.selectors.dialogContent().should("be.visible");
     editProfileDialog.uploadProfileImage(
       "cypress/fixtures/images/profile-image.jpg",
     );

@@ -1,6 +1,6 @@
 const { defineConfig } = require("cypress");
-const allureWriter = require("@shelex/cypress-allure-plugin/writer");
-import { addMatchImageSnapshotPlugin } from "@simonsmith/cypress-image-snapshot/plugin";
+// const allureWriter = require("@shelex/cypress-allure-plugin/writer");
+// import { addMatchImageSnapshotPlugin } from "@simonsmith/cypress-image-snapshot/plugin";
 
 const path = require("path");
 const fs = require("fs");
@@ -14,7 +14,7 @@ const getConfig = (env) => {
 };
 
 module.exports = defineConfig({
-  allowCypressEnv: true,
+  allowCypressEnv: false,
   env: {
     defaultUserCreds: {
       username: "hillel-1@aaa.com",
@@ -34,7 +34,7 @@ module.exports = defineConfig({
   video: true,
   viewportHeight: 720,
   viewportWidth: 1080,
-  // reporter: "cypress-mochawesome-reporter",
+  reporter: "cypress-mochawesome-reporter",
   // reporterOptions: {
   //   reportDir: "cypress/reports",
   //   overwrite: false,
@@ -44,10 +44,11 @@ module.exports = defineConfig({
 
   e2e: {
     setupNodeEvents(on, config) {
-      // require("cypress-mochawesome-reporter/plugin")(on);
-      // require("@testomatio/reporter/cypress")(on, config);
-      addMatchImageSnapshotPlugin(on);
-      allureWriter(on, config);
+      require("cypress-mochawesome-reporter/plugin")(on);
+
+      // addMatchImageSnapshotPlugin(on); // snapshot testing setup - needs `allowCypressEnv: true`
+      // allureWriter(on, config); // allure reporter setup - needs `allowCypressEnv: true`
+
       // implement node event listeners here
       on("task", {
         log(message) {
@@ -55,6 +56,8 @@ module.exports = defineConfig({
           return null;
         },
       });
+
+      // --------- Config loading logic ---------
       // const isDev = config.env.TEST_ENV === "dev";
       // if (isDev) {
       //   config.baseUrl = "https://qauto.forstudy.space";
@@ -69,7 +72,9 @@ module.exports = defineConfig({
       //     password: "testHillel2!",
       //   };
       // }
+      // --------- Config loading logic ---------
 
+      // --------- Config loading from JSON logic ---------
       const configValue = getConfig(process.env.TEST_ENV || "dev");
       console.log(
         `Loaded config for ${process.env.TEST_ENV || "dev"}:`,
@@ -77,7 +82,7 @@ module.exports = defineConfig({
       );
       config.env = { ...config.env, ...configValue.env };
       config = { ...config, ...configValue };
-      // return require("@testomatio/reporter/cypress")(on, config);
+      // return require("@testomatio/reporter/cypress")(on, config); // this is handling of Testomat, breaks config loading from JSON
       return config;
     },
     baseUrl: "https://qauto.forstudy.space",
