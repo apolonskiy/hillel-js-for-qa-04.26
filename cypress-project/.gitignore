@@ -4,3 +4,5 @@ cypress/videos
 cypress/reports
 allure-results
 cypress/snapshots/**/__diff_output__
+cypress/parallel-weights.json
+multi-reporter-config.json
