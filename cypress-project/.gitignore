@@ -8,3 +8,4 @@ cypress/snapshots/**/__diff_output__
 cypress/parallel-weights.json
 multi-reporter-config.json
 runner-results
+.DS_Store
