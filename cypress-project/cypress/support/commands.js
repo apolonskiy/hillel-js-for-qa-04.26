@@ -33,6 +33,18 @@ Cypress.Commands.add("login", (username, password) => {
   });
 });
 
+Cypress.Commands.add("loginHeadless", (username, password) => {
+  cy.request({
+    url: "/api/auth/signin",
+    method: "POST",
+    body: {
+      email: username,
+      password: password,
+      remember: false,
+    },
+  });
+});
+
 Cypress.Commands.overwrite("visit", (originalFn, url, options) => {
   originalFn(url, {
     auth: Cypress.expose("basicAuth"),
