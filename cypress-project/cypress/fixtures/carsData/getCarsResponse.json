@@ -1,0 +1,29 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "id": 531433,
+            "carBrandId": 4,
+            "carModelId": 17,
+            "initialMileage": 234324,
+            "updatedMileageAt": "2026-06-22T12:21:38.000Z",
+            "carCreatedAt": "2026-06-22T12:21:38.000Z",
+            "mileage": 234324,
+            "brand": "Porsche",
+            "model": "Cayenne",
+            "logo": "porsche.png"
+        },
+        {
+            "id": 23523,
+            "carBrandId": 2,
+            "carModelId": 8,
+            "initialMileage": 9999,
+            "updatedMileageAt": "2026-06-22T12:21:38.000Z",
+            "carCreatedAt": "2026-06-22T12:21:38.000Z",
+            "mileage": 99999,
+            "brand": "BMW",
+            "model": "X5",
+            "logo": "bmw.png"
+        }
+    ]
+}

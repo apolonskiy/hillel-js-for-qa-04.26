@@ -4,11 +4,13 @@ import {
   LeftNavBar,
   ProfilePage,
   EditProfileDialog,
+  GaragePage,
 } from "../support/poms";
 
 const landingPage = new LandingPage();
 const profilePage = new ProfilePage();
 const editProfileDialog = new EditProfileDialog();
+const garagePage = new GaragePage();
 
 // This is replaced with Class-based test.
 describe.skip("Profile page tests", () => {
@@ -68,5 +70,45 @@ describe("Profile page tests - class based", () => {
       .profileImage()
       .should("exist")
       .and("have.attr", "src");
+  });
+});
+
+describe("Create car with interception and cleanup", () => {
+  beforeEach(() => {
+    cy.env(["defaultUserCreds"]).then(({ defaultUserCreds }) => {
+      cy.loginHeadless(defaultUserCreds.username, defaultUserCreds.password);
+    });
+    cy.visit(Cypress.config().baseUrl);
+    garagePage.selectGaragePage();
+  });
+
+  afterEach(function () {
+    if (this.createdCarId) {
+      cy.request({
+        method: "DELETE",
+        url: `/api/cars/${this.createdCarId}`,
+      });
+    }
+  });
+
+  it("Create car via UI and intercept its ID for future cleanup", () => {
+    cy.wait(500);
+    garagePage.clickAddButton();
+    cy.intercept("POST", "/api/cars").as("createCarRequest");
+    const brand = "Porsche";
+    const model = "911";
+    garagePage.addCarDialog.addCar({
+      brand,
+      model,
+      mileage: "10000",
+    });
+    cy.wait("@createCarRequest").then((interception) => {
+      console.log(interception);
+      cy.wrap(interception.response.body.data.id).as("createdCarId");
+    });
+    garagePage.selectors
+      .genericCarCard(`${brand} ${model}`)
+      .first()
+      .should("be.visible");
   });
 });

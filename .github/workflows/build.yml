@@ -24,6 +24,21 @@ jobs:
       - name: Run lint
         working-directory: ./lesson-14
         run: npm run lint
+  lint-cypress: 
+    name: 'Lint Cypress tests folder'
+    runs-on: ubuntu-latest
+    container:
+      image: node:25-slim 
+    steps:
+      - uses: actions/checkout@v6
+      - name: check node
+        run: node -v
+      - name: Install dependecies
+        working-directory: ./cypress-project
+        run: npm i
+      - name: Run lint
+        working-directory: ./cypress-project
+        run: npm run lint
   test-api: 
     name: 'API tests Jest'
     if: ${{ always() }}
@@ -46,4 +61,27 @@ jobs:
           name: test-api-html-report
           path: |
                 lesson-14/html-report/
+          retention-days: 3
+  test-cypress: 
+    name: 'Cypress e2e tests'
+    needs: lint-cypress
+    runs-on: ubuntu-latest
+    container:
+     image: cypress/included:latest
+     options: --user 1001
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        working-directory: ./cypress-project
+        run: npm ci
+      - uses: cypress-io/github-action@v7
+        with:
+          browser: chrome
+          working-directory: ./cypress-project
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: cypress-report-default
+          path: |
+                cypress-project/cypress/reports/
           retention-days: 3
