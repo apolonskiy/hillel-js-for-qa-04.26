@@ -25,13 +25,24 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 60_000,
+  expect: {
+    timeout: 4_000,
+  },
   use: {
+    actionTimeout: 10_000,
+    navigationTimeout: 30_000,
+    // dataIdAttribute: 'data-test',
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
     screenshot: 'on',
     video: 'on',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
+    httpCredentials: {
+      username: 'guest',
+      password: 'welcome2qauto'
+    }
   },
 
   /* Configure projects for major browsers */
