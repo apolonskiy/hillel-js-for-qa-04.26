@@ -1,8 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-const NODE_INDEX = Number(process.env.CI_NODE_INDEX || 1);
-const NODE_TOTAL = Number(process.env.CI_NODE_TOTAL || 3);
+// CI_NODE_INDEX and other CI_ env vars are default for GITLAB, for our customa Github implementation we use NODE_INDEX and NODE_TOTAL
+const NODE_INDEX = Number(
+  process.env.CI_NODE_INDEX || process.env.NODE_INDEX || 1,
+);
+const NODE_TOTAL = Number(
+  process.env.CI_NODE_TOTAL || process.env.NODE_TOTAL || 3,
+);
 const TEST_FOLDER = path.resolve(__dirname, process.argv[2]);
 
 const walk = (dir) => {
