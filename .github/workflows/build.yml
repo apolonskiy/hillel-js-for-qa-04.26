@@ -66,6 +66,13 @@ jobs:
     name: 'Cypress e2e tests'
     needs: lint-cypress
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        NODE_INDEX: [1, 2, 3]
+        NODE_TOTAL: [3]
+    env:
+      NODE_INDEX: ${{ matrix.NODE_INDEX }}
+      NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
     container:
      image: cypress/included:latest
      options: --user 1001
@@ -74,10 +81,13 @@ jobs:
       - name: Install dependencies
         working-directory: ./cypress-project
         run: npm ci
-      - uses: cypress-io/github-action@v7
-        with:
-          browser: chrome
-          working-directory: ./cypress-project
+      # - uses: cypress-io/github-action@v7
+      #   with:
+      #     browser: chrome
+      #     working-directory: ./cypress-project
+      - name: Run cypress tests in parallel
+        working-directory: ./cypress-project
+        run: npm run cypress:parallel:ci
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:

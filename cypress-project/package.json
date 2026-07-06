@@ -15,13 +15,14 @@
     "cypress:run:chrome:node-prod:headless": "TEST_ENV=prod cypress run --browser chrome --env allure=true",
     "merge-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/mochawesome-result.json",
     "generate-report": "npx marge cypress/reports/mochawesome-result.json -o cypress/reports/html",
-    "cypress:parallel": "cypress-parallel -s cypress:run:chrome:node-prod:headless -t 2 -d cypress/e2e -r mochawesome -o '\"reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true\"'"
+    "cypress:parallel": "cypress-parallel -s cypress:run:chrome:node-prod:headless -t 2 -d cypress/e2e -r mochawesome -o '\"reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true\"'",
+    "cypress:parallel:ci": "cypress run  --browser chrome --env TEST_ENV=dev --spec \"$(node cypress-parallel.js ./cypress/e2e)\""
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cypress": "^15.17.0"
+    "cypress": "^15.18.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
