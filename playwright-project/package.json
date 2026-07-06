@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext .js,.mjs",
+    "lint:fix": "npm run lint -- --fix",
     "playwright:test": "playwright test",
     "playwright:test:headed": "playwright test --headed",
     "playwright:test:headed:chrome": "playwright test --headed --project='Google Chrome'"
@@ -12,7 +14,14 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "1.61.1",
-    "@types/node": "^26.0.1"
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^26.0.1",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.10.4",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.4"
   }
 }
