@@ -7,7 +7,10 @@
     "lint:fix": "npm run lint -- --fix",
     "playwright:test": "playwright test",
     "playwright:test:headed": "playwright test --headed",
-    "playwright:test:headed:chrome": "playwright test --headed --project='Google Chrome'"
+    "playwright:test:headed:chrome": "playwright test --headed --project='Google Chrome'",
+    "playwright:test:headed:chrome:qa1-export-example": "export $(cat .env) &&  playwright test --headed --project='Google Chrome'",
+    "playwright:test:headed:chrome:qa1": "cross-env TEST_ENV=qauto1 playwright test --headed --project='Google Chrome'",
+    "playwright:test:headed:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --headed --project='Google Chrome'"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,8 @@
     "@playwright/test": "1.61.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^26.0.1",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-playwright": "^2.10.4",

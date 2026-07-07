@@ -2,17 +2,21 @@ import { test, expect, devices } from "@playwright/test";
 import * as path from "path";
 
 test.describe("Basic login to QAuto test site", () => {
-  test("Successful login", async ({ page }) => {
-    await page.goto("https://qauto.forstudy.space/");
+  test("Successful login", async ({ page, baseURL }) => {
+    await page.goto(baseURL);
     await page.getByRole("button", { name: "Sign In", exact: true }).click();
     const isVisibleInput = page.locator('input[id="signinEmail"]');
     await expect(isVisibleInput).toBeVisible();
-    await page.locator('input[id="signinEmail"]').fill("hillel-1@aaa.com");
-    await page.locator('input[id="signinPassword"]').fill("testHillel1!");
+    await page
+      .locator('input[id="signinEmail"]')
+      .fill(process.env.DEFAULT_USER_EMAIL);
+    await page
+      .locator('input[id="signinPassword"]')
+      .fill(process.env.DEFAULT_USER_PASSWORD);
     await page
       .locator("button[class*=btn-primary]", { hasText: "Login" })
       .click({ timeout: 5000 });
-    await expect(page).toHaveURL("https://qauto.forstudy.space/panel/garage");
+    await expect(page).toHaveURL(`${baseURL}/panel/garage`);
     await expect(
       page.getByRole("heading").filter({ hasText: "Garage" }),
     ).toBeVisible();
@@ -31,16 +35,20 @@ test.describe("Basic login to QAuto test site", () => {
       .click();
   });
 
-  test.skip("Snapshot testing for profile page", async ({ page }) => {
-    await page.goto("https://qauto.forstudy.space/");
+  test.skip("Snapshot testing for profile page", async ({ page, baseURL }) => {
+    await page.goto(baseURL);
     await expect(page).toHaveScreenshot("landing-page.png");
     await page.getByRole("button", { name: "Sign In", exact: true }).click();
-    await page.locator('input[id="signinEmail"]').fill("hillel-1@aaa.com");
-    await page.locator('input[id="signinPassword"]').fill("testHillel1!");
+    await page
+      .locator('input[id="signinEmail"]')
+      .fill(process.env.DEFAULT_USER_EMAIL);
+    await page
+      .locator('input[id="signinPassword"]')
+      .fill(process.env.DEFAULT_USER_PASSWORD);
     await page
       .locator("button[class*=btn-primary]", { hasText: "Login" })
       .click({ timeout: 5000 });
-    await expect(page).toHaveURL("https://qauto.forstudy.space/panel/garage");
+    await expect(page).toHaveURL(`${baseURL}/panel/garage`);
     await page.getByRole("link", { name: "Profile" }).first().click();
     await page.waitForTimeout(1000);
     await expect(page).toHaveScreenshot("profile-page.png");

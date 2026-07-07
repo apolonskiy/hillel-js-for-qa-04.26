@@ -18,15 +18,20 @@ let loginDialog;
 let header;
 
 test.describe("Settings page tests", () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, baseURL }) => {
     settingsPage = new SettingsPage(page);
     landingPage = new LandingPage(page);
     loginDialog = new LoginDialog(page);
     header = new Header(page);
     await landingPage.open();
     await landingPage.clickSignInButton();
-    await loginDialog.login("hillel-1@aaa.com", "testHillel1!");
-    await expect(page).toHaveURL("https://qauto.forstudy.space/panel/garage");
+    await loginDialog.login(
+      process.env.DEFAULT_USER_EMAIL,
+      process.env.DEFAULT_USER_PASSWORD,
+    );
+    await expect(page).toHaveURL(`${baseURL}/panel/garage`);
+    await expect(page).toHaveURL(/panel\/garage/);
+    await expect(page).toHaveURL(new RegExp("/panel/garage"));
     await header.clickMyProfileButton();
     await header.clickMyProfileDropdownLink("Settings");
   });

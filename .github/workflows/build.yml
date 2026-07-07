@@ -73,6 +73,8 @@ jobs:
     env:
       NODE_INDEX: ${{ matrix.NODE_INDEX }}
       NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
+      SOME_VAR_NAME: ${{ secrets.SOME_VAR_NAME }}
+      SOME_VISIBLE_VAR: ${{ env.SOME_VISIBLE_VAR }}
     container:
      image: cypress/included:latest
      options: --user 1001
