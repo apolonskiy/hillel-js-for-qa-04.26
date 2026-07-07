@@ -1,6 +1,10 @@
 // @ts-check
 import { defineConfig, devices } from "@playwright/test";
+import dotenv from "dotenv";
 
+dotenv.config({
+  path: `./src/config/env/.env.${process.env.TEST_ENV || "qauto1"}`,
+});
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -34,14 +38,14 @@ export default defineConfig({
     navigationTimeout: 30_000,
     // dataIdAttribute: 'data-test',
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: "https://qauto.forstudy.space",
+    baseURL: process.env.BASE_URL || "https://qauto.forstudy.space",
     screenshot: "on",
     video: "on",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on",
     httpCredentials: {
-      username: "guest",
-      password: "welcome2qauto",
+      username: `${process.env.HTTP_CREDENTIALS_USERNAME}`,
+      password: `${process.env.HTTP_CREDENTIALS_PASSWORD}`,
     },
   },
 
