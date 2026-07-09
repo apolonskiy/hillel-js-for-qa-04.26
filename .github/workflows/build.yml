@@ -103,7 +103,7 @@ jobs:
     container:
      image: mcr.microsoft.com/playwright:v1.61.1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install dependencies
         working-directory: ./playwright-project
         run: |

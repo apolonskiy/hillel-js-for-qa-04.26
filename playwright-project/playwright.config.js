@@ -27,7 +27,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter:  [['list'], ['html'], ['github'], [
+  reporter:  [['list'], ['html'], [
     '@testomatio/reporter/playwright',
     {
       apiKey: process.env.TESTOMATIO,
