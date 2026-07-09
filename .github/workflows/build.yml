@@ -99,7 +99,6 @@ jobs:
           retention-days: 3
   tests-pw: 
     name: 'PW e2e tests on default image'
-    needs: tests-pw-custom-image
     runs-on: ubuntu-latest
     container:
      image: mcr.microsoft.com/playwright:v1.61.1
