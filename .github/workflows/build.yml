@@ -115,7 +115,7 @@ jobs:
           TESTOMATIO: ${{ vars.TESTOMATIO }}
           TESTOMATIO_CREATE: ${{ vars.TESTOMATIO_CREATE }}
         run: |
-              npm run playwright:test:headed:chrome:qa1
+              npm run playwright:test:headless:chrome
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
