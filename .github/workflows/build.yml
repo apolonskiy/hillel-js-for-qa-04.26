@@ -97,3 +97,29 @@ jobs:
           path: |
                 cypress-project/cypress/reports/
           retention-days: 3
+  tests-pw: 
+    name: 'PW e2e tests on default image'
+    needs: tests-pw-custom-image
+    runs-on: ubuntu-latest
+    container:
+     image: mcr.microsoft.com/playwright:v1.61.1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        working-directory: ./playwright-project
+        run: npm ci
+      - name: Run e2e tests
+        working-directory: ./playwright-project
+        env:
+          TESTOMATIO: ${{ vars.TESTOMATIO }}
+          TESTOMATIO_CREATE: ${{ vars.TESTOMATIO_CREATE }}
+        run: |
+              npm run playwright:test:headed:chrome:qa1
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-default
+          path: |
+                playwright-project/playwright-report/
+                playwright-project/test-results/
+          retention-days: 3
