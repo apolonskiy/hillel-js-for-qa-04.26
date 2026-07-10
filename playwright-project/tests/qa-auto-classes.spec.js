@@ -134,6 +134,7 @@ test.describe("Settings page tests", () => {
     });
 
     await test.step("Verify change email errors", async () => {
+      await page.reload();
       await settingsPage.clickChangeEmailButton();
       await expect(
         settingsPage.selectors.genericInputValidationError("Email required"),
@@ -155,6 +156,7 @@ test.describe("Settings page tests", () => {
     });
 
     await test.step("Verify change password errors", async () => {
+      await page.reload();
       await settingsPage.clickChangePasswordButton();
       await expect(
         settingsPage.selectors.genericInputValidationError(
@@ -182,9 +184,9 @@ test.describe("Settings page tests", () => {
         settingsPage.selectors.genericInputValidationError(""),
       ).toHaveCount(0);
       await settingsPage.clickChangePasswordButton();
-      await expect(settingsPage.selectors.errorSnackbar).toHaveText(
-        "Wrong password",
-      );
+      await expect(
+        settingsPage.selectors.errorSnackbarByText("Wrong password"),
+      ).toBeVisible();
     });
   });
 });
