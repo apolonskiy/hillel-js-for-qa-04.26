@@ -131,7 +131,7 @@ jobs:
       - name: Run e2e tests
         working-directory: ./playwright-project
         run: |
-              npm run playwright:test:headed:chrome:qa1
+              npm run playwright:test:headless:chrome:qa1
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
