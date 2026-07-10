@@ -27,7 +27,22 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: process.env.CI
+    ? [
+        ["list", { printSteps: true }],
+        ["html", { open: process.env.CI ? "never" : "on-failure" }],
+        ["github"],
+        [
+          "@testomatio/reporter/playwright",
+          {
+            apiKey: process.env.TESTOMATIO,
+          },
+        ],
+      ]
+    : [
+        ["list", { printSteps: true }],
+        ["html", { open: "on-failure" }],
+      ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   timeout: 60_000,
   expect: {
@@ -40,9 +55,9 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: process.env.BASE_URL || "https://qauto.forstudy.space",
     screenshot: "on",
-    video: "on",
+    video: "retain-on-failure",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on",
+    trace: "retain-on-failure",
     httpCredentials: {
       username: `${process.env.HTTP_CREDENTIALS_USERNAME}`,
       password: `${process.env.HTTP_CREDENTIALS_PASSWORD}`,
