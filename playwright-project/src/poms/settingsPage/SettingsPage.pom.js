@@ -46,6 +46,8 @@ export class SettingsPage extends BasePage {
       name: "Change password",
     }),
     errorSnackbar: this._page.locator('[class*="alert-danger"]'),
+    errorSnackbarByText: (errorText) =>
+      this._page.locator('[class*="alert-danger"]', { hasText: errorText }),
   };
 
   constructor(page) {
