@@ -1,0 +1,32 @@
+{
+    "global": {
+        "baseUrl": "https://qauto2.forstudy.space",
+        "httpCredentialsUsername": "guest",
+        "httpCredentialsPassword": "welcome2qauto",
+        "defaultUserEmail": "hillel-2@aaa.com",
+        "defaultUserPassword": "testHillel2!"
+    },
+    "groups": {
+        "compareTests": {
+                "envs": [
+                        {
+                            "baseUrl": "https://qauto.forstudy.space",
+                            "defaultUserEmail": "hillel-1@aaa.com",
+                            "defaultUserPassword": "testHillel1!"
+                        },
+                        {
+                            "baseUrl": "https://qauto2.forstudy.space",
+                            "defaultUserEmail": "hillel-2@aaa.com",
+                            "defaultUserPassword": "testHillel2!"
+                        }
+                    ]
+                }
+    },
+    "tests":{
+        "qauto1Override": {
+            "baseUrl": "https://qauto1.forstudy.space",
+            "defaultUserEmail": "hillel-1@aaa.com",
+            "defaultUserPassword": "testHillel1!"
+        }
+    }
+}
