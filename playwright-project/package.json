@@ -9,10 +9,10 @@
     "playwright:test:headed": "playwright test --headed",
     "playwright:test:headed:chrome": "playwright test --headed --project='Google Chrome'",
     "playwright:test:headed:chrome:qa1-export-example": "export $(cat .env) &&  playwright test --headed --project='Google Chrome'",
-    "playwright:test:headed:chrome:qa1": "cross-env TEST_ENV=qauto1 playwright test --headed --project='Google Chrome'",
-    "playwright:test:headless:chrome:qa1": "cross-env TEST_ENV=qauto1 playwright test --project='Google Chrome'",
-    "playwright:test:headed:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --headed --project='Google Chrome'",
-    "playwright:test:headless:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --project='Google Chrome'",
+    "playwright:test:headed:chrome:qa1": "cross-env TEST_ENV=qauto1 playwright test --headed --project='Google Chrome' --project=singleLoginChrome",
+    "playwright:test:headless:chrome:qa1": "cross-env TEST_ENV=qauto1 playwright test --project='Google Chrome' --project=singleLoginChrome",
+    "playwright:test:headed:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --headed --project='Google Chrome' --project=singleLoginChrome",
+    "playwright:test:headless:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --project='Google Chrome' --project=singleLoginChrome",
     "playwright:test:headed:chrome:qa1:chromeSetup": "cross-env TEST_ENV=qauto1 playwright test --headed --project=singleLoginChrome"
 
   },
