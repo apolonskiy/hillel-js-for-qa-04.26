@@ -27,7 +27,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : 3,
+  workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI
     ? [
@@ -73,6 +73,17 @@ export default defineConfig({
       grep: /@smoke/,
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "chromeSetup",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
+      testMatch: /.*\.setup\.js/,
+    },
+    {
+      name: "singleLoginChrome",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
+      dependencies: ["chromeSetup"],
+      testMatch: /.*chromeSetup\.js/,
     },
     {
       name: "Google Chrome",
