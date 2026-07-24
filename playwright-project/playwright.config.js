@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 dotenv.config({
   path: `./src/config/env/.env.${process.env.TEST_ENV || "qauto1"}`,
 });
+
+export const paramsFilePath = `src/config/params/${process.env.TEST_ENV || "qauto1"}.config.json`;
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -62,6 +64,7 @@ export default defineConfig({
       username: `${process.env.HTTP_CREDENTIALS_USERNAME}`,
       password: `${process.env.HTTP_CREDENTIALS_PASSWORD}`,
     },
+    paramsFilePath,
   },
 
   /* Configure projects for major browsers */

@@ -27,6 +27,7 @@ export default defineConfig([
     rules: {
       "no-undef": 0, // 'off',
       "no-unused-vars": 0, // 'off',
+      "no-prototype-builtins": 0, // 'off',
     },
   },
 ]);
