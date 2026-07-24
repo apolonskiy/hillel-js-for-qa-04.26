@@ -24,7 +24,7 @@
     },
     "tests":{
         "qauto1Override": {
-            "baseUrl": "https://qauto1.forstudy.space",
+            "baseUrl": "https://qauto.forstudy.space",
             "defaultUserEmail": "hillel-1@aaa.com",
             "defaultUserPassword": "testHillel1!"
         }

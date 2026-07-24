@@ -141,6 +141,7 @@ test.describe("Group params tests", () => {
     page,
     params,
   }) => {
+    console.log(params);
     for await (const env of params.envs) {
       await page.goto(env.baseUrl);
       await landingPage.clickSignInButton();
