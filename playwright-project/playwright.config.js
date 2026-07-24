@@ -72,6 +72,17 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
     {
+      name: "chromeSetup",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
+      testMatch: /.*\.setup\.js/,
+    },
+    {
+      name: "singleLoginChrome",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
+      dependencies: ["chromeSetup"],
+      testMatch: /.*chromeSetup\.spec\.js/,
+    },
+    {
       name: "Google Chrome",
       use: { ...devices["Desktop Chrome"], channel: "chrome" }, // or 'chrome-beta'
     },
