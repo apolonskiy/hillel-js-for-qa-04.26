@@ -7,7 +7,7 @@ export class Header extends BasePage {
       this._page.locator('a[class*="header-link"]', { hasText: linkText }),
     myProfileButton: this._page.locator('button[id="userNavDropdown"]'),
     myProfileDropdownLink: (linkText) =>
-      this._page.locator('a[class*="dropdown-item"]', { hasText: linkText }),
+      this._page.locator('[class*="dropdown-item"]', { hasText: linkText }),
   };
 
   async clickLogo() {
