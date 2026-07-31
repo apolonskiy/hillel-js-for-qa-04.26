@@ -100,7 +100,6 @@ describe("Api intercept tests with cypress", () => {
         defaultUserCreds.password,
       );
     });
-    cy.pause();
   });
 });
 

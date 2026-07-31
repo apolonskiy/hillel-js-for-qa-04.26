@@ -1,0 +1,9 @@
+docker images
+docker ps -a
+
+docker build -f Dockerfile.custom -t name:1.2.3 .
+
+docker run -it -v "$PWD":/e2e -w /e2e --entrypoint=npm  cypress/included:15.18.0 run cypress:run:firefox:node-prod:headless
+
+            interactive.  virtual copy of local files  workdirectory (where we start) override for cypress run
+docker run -it            -v "$PWD":/e2e               -w /e2e                           --entrypoint=bash cypress/included:15.18.0

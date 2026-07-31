@@ -11,6 +11,8 @@
     "cypress:run:headed": "cypress run --browser chrome --headed",
     "cypress:run:chrome:dev:headed": "cypress run --browser chrome --headed --env TEST_ENV=dev",
     "cypress:run:chrome:prod:headed": "cypress run --browser chrome --headed --env TEST_ENV=prod",
+    "cypress:run:firefox:node-dev:headless": "TEST_ENV=dev cypress run --browser firefox",
+    "cypress:run:firefox:node-prod:headless": "TEST_ENV=prod cypress run --browser firefox",
     "cypress:run:chrome:node-dev:headless": "TEST_ENV=dev cypress run --browser chrome --env allure=true",
     "cypress:run:chrome:node-prod:headless": "TEST_ENV=prod cypress run --browser chrome --env allure=true",
     "merge-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/mochawesome-result.json",

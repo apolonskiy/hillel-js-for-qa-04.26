@@ -117,7 +117,7 @@ jobs:
     needs: lint-pw
     runs-on: ubuntu-latest
     container:
-     image: mcr.microsoft.com/playwright:v1.61.1
+     image: mcr.microsoft.com/playwright:v1.62.0
     env:
         TESTOMATIO: ${{ secrets.TESTOMATIO }}
         TESTOMATIO_CREATE: ${{ vars.TESTOMATIO_CREATE }}
