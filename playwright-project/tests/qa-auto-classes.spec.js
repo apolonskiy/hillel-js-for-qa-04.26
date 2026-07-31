@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, request } from "@playwright/test";
 import {
   SettingsPage,
   Currencies,
@@ -18,11 +18,29 @@ let loginDialog;
 let header;
 
 test.describe("Settings page tests", () => {
-  test.beforeEach(async ({ page, baseURL }) => {
+  test.beforeEach(async ({ page, baseURL, request: defaultRequest }) => {
+    // const customRequestContext = await request.newContext()
+    // await customRequestContext.post(`${baseURL}/api/auth/login`)
+    // await defaultRequest.post(`/api/auth/login`);
     settingsPage = new SettingsPage(page);
     landingPage = new LandingPage(page);
     loginDialog = new LoginDialog(page);
     header = new Header(page);
+    // page.on("request", (request) => {
+    //   if (request.url().includes(baseURL)) {
+    //     console.log(">>", request.method(), request.url(), request.postData());
+    //   }
+    // });
+    // page.on("response", async (response) => {
+    //   if (response.url().includes(baseURL)) {
+    //     console.log(
+    //       "<<",
+    //       response.status(),
+    //       response.url(),
+    //       (await response.body()).toString(),
+    //     );
+    //   }
+    // });
     await landingPage.open();
     await landingPage.clickSignInButton();
     await loginDialog.login(
@@ -36,7 +54,17 @@ test.describe("Settings page tests", () => {
     await header.clickMyProfileDropdownLink("Settings");
   });
 
-  test.afterEach(async ({ page }) => {
+  test.afterEach(async ({ page, request: defaultTestRequest }) => {
+    // await defaultTestRequest.post("/api/auth/signin", {
+    //   data: {
+    //     email: process.env.DEFAULT_USER_EMAIL,
+    //     password: process.env.DEFAULT_USER_PASSWORD,
+    //   },
+    // });
+    // const resp = await defaultTestRequest.put("/api/users/settings", {
+    //   data: { currency: Currencies.USD.toLowerCase(), distanceUnits: Units.KM },
+    // });
+
     await page.request.put("/api/users/settings", {
       data: { currency: Currencies.USD.toLowerCase(), distanceUnits: Units.KM },
     });
@@ -49,10 +77,79 @@ test.describe("Settings page tests", () => {
     await expect(settingsPage.selectors.unitsButton(Units.KM)).toContainClass(
       "-active",
     );
+    const requestPromise = page.waitForRequest(
+      (request) =>
+        request.url().includes("/api/users/settings") &&
+        request.method() === "PUT",
+    );
+    const responsePromise = page.waitForResponse(
+      async (response) =>
+        response.url().includes("/api/users/settings") &&
+        response.request().method() === "PUT" &&
+        (await response.request().postData()) !==
+          JSON.stringify({ currency: "eur" }),
+    );
     await settingsPage.updateSettings({
       currency: Currencies.EUR,
       units: Units.ML,
     });
+    const req = await requestPromise;
+    // console.log(await req.postData());
+    const resp = await responsePromise;
+    // console.log(await resp.json());
+    await expect(
+      settingsPage.selectors.currencyButton(Currencies.EUR),
+    ).toContainClass("-active");
+    await expect(settingsPage.selectors.unitsButton(Units.ML)).toContainClass(
+      "-active",
+    );
+  });
+
+  test.skip("Verify currency and units settings with api route interceptions", async ({
+    page,
+  }) => {
+    await expect(
+      settingsPage.selectors.currencyButton(Currencies.USD),
+    ).toContainClass("-active");
+    await expect(settingsPage.selectors.unitsButton(Units.KM)).toContainClass(
+      "-active",
+    );
+
+    // Fetch + fultill
+    // await page.route("**/api/users/settings", async (route) => {
+    //   const resp = await route.fetch();
+    //   const json = await resp.json();
+    //   await route.fulfill({
+    //     status: 200,
+    //     json: { data: { ...json.data, currency: "uah", distanceUnits: "ml" } },
+    //   });
+    // });
+
+    // Continue
+    // await page.context().clearCookies({ name: "sid" });
+    // await page.route("**/api/users/settings", async (route, request) => {
+    //   const reqHeaders = request.headers();
+    //   console.log("reqHeaders", reqHeaders);
+    //   // Cookie replacement is not supported in Playwright, so we need to set both cookie and Cookie headers
+    //   // https://playwright.dev/docs/api/class-route#route-continue
+    //   const headers = {
+    //     ...reqHeaders,
+    //     cookie: "sid=invalid;",
+    //     Cookie: "sid=invalid;",
+    //   };
+    //   console.log("headers", headers);
+    //   await route.continue({ headers });
+    // });
+
+    // Abort
+    // await page.route("**/api/users/settings", async (route) => {
+    //   await route.abort("aborted");
+    // });
+    await settingsPage.updateSettings({
+      currency: Currencies.EUR,
+      units: Units.ML,
+    });
+
     await expect(
       settingsPage.selectors.currencyButton(Currencies.EUR),
     ).toContainClass("-active");
