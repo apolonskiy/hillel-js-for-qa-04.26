@@ -83,9 +83,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        containers: [1, 2, 3]
         NODE_INDEX: [1, 2, 3]
         NODE_TOTAL: [3]
     env:
+      CYPRESS_RECORD_KEY: ${{ secrets.EXAMPLE_RECORDING_KEY }}
       NODE_INDEX: ${{ matrix.NODE_INDEX }}
       NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
       SOME_VAR_NAME: ${{ secrets.SOME_VAR_NAME }}
@@ -98,13 +100,16 @@ jobs:
       - name: Install dependencies
         working-directory: ./cypress-project
         run: npm ci
-      # - uses: cypress-io/github-action@v7
-      #   with:
-      #     browser: chrome
-      #     working-directory: ./cypress-project
-      - name: Run cypress tests in parallel
-        working-directory: ./cypress-project
-        run: npm run cypress:parallel:ci
+      - uses: cypress-io/github-action@v7
+        with:
+          browser: chrome
+          parallel: true
+          group: 'Cypress e2e tests'
+          record: true
+          working-directory: ./cypress-project
+      # - name: Run cypress tests in parallel
+      #   working-directory: ./cypress-project
+      #   run: npm run cypress:parallel:ci
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
