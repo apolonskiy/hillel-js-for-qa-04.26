@@ -114,7 +114,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
-          name: cypress-report-default-${{ matrix.NODE_INDEX }}
+          name: cypress-report-default-${{ matrix.containers }}
           path: |
                 cypress-project/cypress/reports/
           retention-days: 3
