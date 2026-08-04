@@ -124,7 +124,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
      image: mcr.microsoft.com/playwright:v1.62.0
+    strategy:
+      matrix:
+        NODE_INDEX: [1, 2, 3]
+        NODE_TOTAL: [3]
     env:
+        NODE_INDEX: ${{ matrix.NODE_INDEX }}
+        NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
         TESTOMATIO: ${{ secrets.TESTOMATIO }}
         TESTOMATIO_CREATE: ${{ vars.TESTOMATIO_CREATE }}
     steps:
@@ -137,7 +143,7 @@ jobs:
       - name: Run e2e tests
         working-directory: ./playwright-project
         run: |
-              npm run playwright:test:headless:chrome:qa1
+              npm run playwright:parallel:chrome:qa1
       - uses: actions/upload-artifact@v7
         if: ${{ failure() || success() }}
         with:
