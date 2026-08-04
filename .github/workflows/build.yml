@@ -84,12 +84,13 @@ jobs:
     strategy:
       matrix:
         containers: [1, 2, 3]
-        NODE_INDEX: [1, 2, 3]
-        NODE_TOTAL: [3]
+        # NODE_INDEX: [1, 2, 3]
+        # NODE_TOTAL: [3]
     env:
       CYPRESS_RECORD_KEY: ${{ secrets.EXAMPLE_RECORDING_KEY }}
-      NODE_INDEX: ${{ matrix.NODE_INDEX }}
-      NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
+      NODE_INDEX: ${{ matrix.containers }}
+      # NODE_INDEX: ${{ matrix.NODE_INDEX }}
+      # NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
       SOME_VAR_NAME: ${{ secrets.SOME_VAR_NAME }}
       SOME_VISIBLE_VAR: ${{ vars.SOME_VISIBLE_VAR }}
     container:
