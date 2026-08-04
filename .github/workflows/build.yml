@@ -1,7 +1,7 @@
 name: CI Testing
 on:
-  schedule:
-   - cron: '*/15 * * * *'
+  # schedule:
+  #  - cron: '*/15 * * * *'
   push:
     branches:
       - "*"
@@ -147,7 +147,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: ${{ failure() || success() }}
         with:
-          name: playwright-report-${{ matrix.containers }}
+          name: playwright-report-${{ matrix.NODE_INDEX }}
           path: |
                 playwright-project/playwright-report/
                 playwright-project/test-results/
@@ -155,7 +155,7 @@ jobs:
       - uses: actions/download-artifact@v7
         if: ${{ failure() || success() }}
         with:
-          name: playwright-report-${{ matrix.containers }}
+          name: playwright-report-${{ matrix.NODE_INDEX }}
           path: |
                 playwright-project/playwright-report/
                 playwright-project/test-results/
