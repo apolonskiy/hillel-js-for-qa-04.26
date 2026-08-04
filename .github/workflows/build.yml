@@ -1,7 +1,7 @@
 name: CI Testing
 on:
-  schedule:
-   - cron: '*/15 * * * *'
+  # schedule:
+  #  - cron: '*/15 * * * *'
   push:
     branches:
       - "*"
@@ -83,11 +83,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        NODE_INDEX: [1, 2, 3]
-        NODE_TOTAL: [3]
+        containers: [1, 2, 3]
+        # NODE_INDEX: [1, 2, 3]
+        # NODE_TOTAL: [3]
     env:
-      NODE_INDEX: ${{ matrix.NODE_INDEX }}
-      NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
+      CYPRESS_RECORD_KEY: ${{ secrets.EXAMPLE_RECORDING_KEY }}
+      NODE_INDEX: ${{ matrix.containers }}
+      # NODE_INDEX: ${{ matrix.NODE_INDEX }}
+      # NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
       SOME_VAR_NAME: ${{ secrets.SOME_VAR_NAME }}
       SOME_VISIBLE_VAR: ${{ vars.SOME_VISIBLE_VAR }}
     container:
@@ -98,17 +101,20 @@ jobs:
       - name: Install dependencies
         working-directory: ./cypress-project
         run: npm ci
-      # - uses: cypress-io/github-action@v7
-      #   with:
-      #     browser: chrome
-      #     working-directory: ./cypress-project
-      - name: Run cypress tests in parallel
-        working-directory: ./cypress-project
-        run: npm run cypress:parallel:ci
+      - uses: cypress-io/github-action@v7
+        with:
+          browser: chrome
+          parallel: true
+          group: 'Cypress e2e tests'
+          record: true
+          working-directory: ./cypress-project
+      # - name: Run cypress tests in parallel
+      #   working-directory: ./cypress-project
+      #   run: npm run cypress:parallel:ci
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
-          name: cypress-report-default-${{ matrix.NODE_INDEX }}
+          name: cypress-report-default-${{ matrix.containers }}
           path: |
                 cypress-project/cypress/reports/
           retention-days: 3
@@ -118,7 +124,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
      image: mcr.microsoft.com/playwright:v1.62.0
+    strategy:
+      matrix:
+        NODE_INDEX: [1, 2, 3]
+        NODE_TOTAL: [3]
     env:
+        NODE_INDEX: ${{ matrix.NODE_INDEX }}
+        NODE_TOTAL: ${{ matrix.NODE_TOTAL }}
         TESTOMATIO: ${{ secrets.TESTOMATIO }}
         TESTOMATIO_CREATE: ${{ vars.TESTOMATIO_CREATE }}
     steps:
@@ -131,11 +143,11 @@ jobs:
       - name: Run e2e tests
         working-directory: ./playwright-project
         run: |
-              npm run playwright:test:headless:chrome:qa1
+              npm run playwright:parallel:chrome:qa1
       - uses: actions/upload-artifact@v7
         if: ${{ failure() || success() }}
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.NODE_INDEX }}
           path: |
                 playwright-project/playwright-report/
                 playwright-project/test-results/
@@ -143,7 +155,7 @@ jobs:
       - uses: actions/download-artifact@v7
         if: ${{ failure() || success() }}
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.NODE_INDEX }}
           path: |
                 playwright-project/playwright-report/
                 playwright-project/test-results/
