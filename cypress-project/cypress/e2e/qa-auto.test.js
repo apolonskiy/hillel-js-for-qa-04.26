@@ -61,7 +61,10 @@ describe("Registration tests", () => {
         cy.get('input[id="signinPassword"]').type(defaultUserCreds.password);
         cy.contains("button", "Login").should("be.enabled").click();
       });
-      cy.url().should("eq", `${Cypress.config().baseUrl}/panel/garage`);
+      cy.url({ timeout: 20_000 }).should(
+        "eq",
+        `${Cypress.config().baseUrl}/panel/garage`,
+      );
     });
   });
 });

@@ -107,7 +107,6 @@ jobs:
           parallel: true
           group: 'Cypress e2e tests'
           record: true
-          auto-cancel-after-failures: 5
           working-directory: ./cypress-project
       # - name: Run cypress tests in parallel
       #   working-directory: ./cypress-project
