@@ -1,7 +1,7 @@
 name: CI Testing
 on:
-  # schedule:
-  #  - cron: '* * * * *'
+  schedule:
+   - cron: '*/15 * * * *'
   push:
     branches:
       - "*"

@@ -14,6 +14,7 @@ const getConfig = (env) => {
 };
 
 module.exports = defineConfig({
+  projectId: "ztqkyb",
   allowCypressEnv: false,
   env: {
     defaultUserCreds: {
