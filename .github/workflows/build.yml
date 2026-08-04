@@ -147,7 +147,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: ${{ failure() || success() }}
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.containers }}
           path: |
                 playwright-project/playwright-report/
                 playwright-project/test-results/
@@ -155,7 +155,7 @@ jobs:
       - uses: actions/download-artifact@v7
         if: ${{ failure() || success() }}
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.containers }}
           path: |
                 playwright-project/playwright-report/
                 playwright-project/test-results/
