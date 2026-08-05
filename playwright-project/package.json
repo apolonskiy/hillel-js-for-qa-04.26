@@ -17,7 +17,9 @@
     "playwright:test:headless:chromium:qa1": "cross-env TEST_ENV=qauto1 playwright test --project=chromium --project=singleLoginChromium",
     "playwright:test:headless:chromium:qa2": "cross-env TEST_ENV=qauto2 playwright test --project=chromium --project=singleLoginChromium",
     "playwright:parallel:chrome:qa1": "cross-env TEST_ENV=qauto1 playwright test --project='Google Chrome' --project=singleLoginChrome --shard=$NODE_INDEX/$NODE_TOTAL",
-    "playwright:parallel:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --project='Google Chrome' --project=singleLoginChrome --shard=$NODE_INDEX/$NODE_TOTAL"
+    "playwright:parallel:chrome:qa2": "cross-env TEST_ENV=qauto2 playwright test --project='Google Chrome' --project=singleLoginChrome --shard=$NODE_INDEX/$NODE_TOTAL",
+    "playwright:parallel:chromium:qa1": "cross-env TEST_ENV=qauto1 playwright test --project=chromium --project=singleLoginChromium --shard=$NODE_INDEX/$NODE_TOTAL",
+    "playwright:parallel:chromium:qa2": "cross-env TEST_ENV=qauto2 playwright test --project=chromium --project=singleLoginChromium --shard=$NODE_INDEX/$NODE_TOTAL"
 
 
   },
